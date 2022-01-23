@@ -10,4 +10,6 @@ Data fetched from
 https://jsonplaceholder.typicode.com/photos
 and 
 
-https://api.instantwebtools.net/v1/airlines# react-pagination
+https://api.instantwebtools.net/v1/airlines
+
+
