@@ -1,3 +1,13 @@
 # pagination
 
-This repo shows how to paginate data in both class components and functinal components using react-paginate
+This repo paginates fetched data in both class components and functional components using react-paginate as well as setting limits on fetch requetss. 
+
+
+Client side, there may not much you can do until pagination is implemented on API side. But, if it is, requests to API can be made using parameters like offset, page, and limit to tell the API how much data to return. 
+
+
+Data fetched from 
+https://jsonplaceholder.typicode.com/photos
+and 
+
+https://api.instantwebtools.net/v1/airlines# react-pagination
