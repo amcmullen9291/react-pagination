@@ -1,33 +1,50 @@
-import axios from 'axios';
-import React from 'react';
-import { useState } from 'react';
+import React, {useState, useEffect} from 'react'
+import axios from 'axios'
+import ReactPaginate from 'react-paginate';
 
 export default function  FunctionalComponentPagination() {
 
-    const [players, setPlayers ] = useState([]);
-    const [ loading, setLoading ] = useState(false);
-    const DATA_URL = "https://nba-players.herokuapp.com/players-stats"
-
-    const getData = async () => {
-        try {
-            const data = await axios.get(DATA_URL);
-            console.log(data.data);
-            setPlayers(data.data)
-        } catch (e){
-            console.log(e);
-        }
+    const [offset, setOffset] = useState(0);
+    const [data, setData] = useState([]);
+    const [perPage] = useState(10);
+    const [pageCount, setPageCount] = useState(0)
+  
+  
+    const getData = async() => {
+        const res = await axios.get(`https://jsonplaceholder.typicode.com/photos`)
+        const data = res.data;
+                  const slice = data.slice(offset, offset + perPage)
+                  const postData = slice.map(pd => <div key={pd.id}>
+                      <p>{pd.title}</p>
+                      <img src={pd.thumbnailUrl} alt=""/>
+                  </div>)
+                  setData(postData)
+                  setPageCount(Math.ceil(data.length / perPage))
     }
-
-    getData();
-
-    
-
-
-return (
-    <>
-    <div>
-        <center><h1>Functional component pagination</h1></center>
-    </div>
-    </>
-);
-}
+    const handlePageClick = (e) => {
+      const selectedPage = e.selected;
+      setOffset(selectedPage + 1)
+  };
+  
+   useEffect(() => {
+     getData()
+   }, [offset])
+  
+    return (
+      <div className="App">
+        {data}
+         <ReactPaginate
+                      previousLabel={"prev"}
+                      nextLabel={"next"}
+                      breakLabel={"..."}
+                      breakClassName={"break-me"}
+                      pageCount={pageCount}
+                      marginPagesDisplayed={2}
+                      pageRangeDisplayed={5}
+                      onPageChange={handlePageClick}
+                      containerClassName={"pagination"}
+                      subContainerClassName={"pages pagination"}
+                      activeClassName={"active"}/>
+      </div>
+    );
+  }
