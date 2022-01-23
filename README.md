@@ -1,6 +1,6 @@
 # pagination
 
-This repo paginates fetched data in both class components and functional components using react-paginate as well as setting limits on fetch requetss. 
+This repo paginates fetched data in both class components and functional components using react-paginate as well as setting limits on fetch requests. 
 
 
 Client side, there may not much you can do until pagination is implemented on API side. But, if it is, requests to API can be made using parameters like offset, page, and limit to tell the API how much data to return. 
