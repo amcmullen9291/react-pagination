@@ -54,6 +54,7 @@ export default class ClassComponentPagination extends Component {
         return (
             <>
             <center><h1>Class component pagination</h1></center>
+            <a href={'/'}>Return Home</a>
             <div>
                 {this.state.postData}
                 <ReactPaginate

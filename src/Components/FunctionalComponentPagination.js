@@ -31,7 +31,11 @@ export default function  FunctionalComponentPagination() {
    }, [offset])
   
     return (
-      <div className="App">
+      <>
+      <center><h1>Functional component pagination</h1></center>
+          <a href={'/'}>Return Home</a>
+
+      <div className="DataTable">
         {data}
          <ReactPaginate
                       previousLabel={"prev"}
@@ -46,5 +50,6 @@ export default function  FunctionalComponentPagination() {
                       subContainerClassName={"pages pagination"}
                       activeClassName={"active"}/>
       </div>
+      </>
     );
   }
