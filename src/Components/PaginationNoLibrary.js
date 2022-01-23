@@ -1,48 +1,47 @@
 import React, { useEffect, useState } from "react";
 
-const renderData = (data) => {
-  return (
-    <ul>
-      {data.map((person, id) => {
-        return <><li key={id}>{person.name}</li><li>{person.country}</li><hr/></>;
-
-      })}
-    </ul>
-  );
-};
 
 function PaginationNoLibrary() {
     const [data, setData] = useState([]);
-    const [pageNumberLimit, setpageNumberLimit] = useState(5);
-    const [maxPageNumberLimit, setmaxPageNumberLimit] = useState(5);
-    const [minPageNumberLimit, setminPageNumberLimit] = useState(0);
-
-    const [currentPage, setcurrentPage] = useState(1);
-    const [itemsPerPage, setitemsPerPage] = useState(5);
-
-  const pages = [];
-  for (let i = 1; i <= Math.ceil(data.length / itemsPerPage); i++) {
-    pages.push(i);
-  }
 
   useEffect(() => {
-    fetch("https://api.instantwebtools.net/v1/airlines")
+    fetch("https://api.instantwebtools.net/v1/passenger?page=0&size=10")
       .then((response) => response.json())
-      .then((resp) => setData(resp))
+      .then((resp) => setData(resp.data))
   }, []);
   
   if(Object.keys(data).length > 1) {
     console.log("data set: ", data);
   }
-     
+
 
   return (
     <>
-      <h1>Passenger Listings</h1> <br />
+    <div id="sidenav">
+      <h1>Passenger Listings</h1><br />
       <a href={'/'}>Return Home</a>
-      <div>
-      {renderData(data)}
       </div>
+      {data && (
+      <div id="mainBackgroundNoLibrary"><table id="FetchWithLimitTable">
+        <thead>
+          <tr>
+            <td>trip ID</td>
+            <td>Passenger name</td>
+            <td># of trips</td>
+          </tr>
+        </thead>
+        <tbody>
+        {data.map((person) => (
+            <tr key={person.id}>
+            <td>{person._id}</td>
+            <td>{person.name}</td>
+            <center><td>{person.trips}</td></center>
+            </tr>
+        ))}
+        </tbody>
+</table>
+      </div>
+    )}
     </>
   );
 }
