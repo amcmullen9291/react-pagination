@@ -11,6 +11,7 @@ function PaginationNoLibrary() {
       .then((resp) => setData(resp.data))
       if((data) && data.length === 0){
         alert("Nothing returned");
+        setPage(1);
     }
   }, [page]);
   
@@ -29,7 +30,7 @@ function PaginationNoLibrary() {
     setPage(page);
     if(page < 1){
       alert("no more results")
-      let pageNum = 0;
+      let pageNum = 1;
       setPage(pageNum);
     }
   }
@@ -38,6 +39,7 @@ function PaginationNoLibrary() {
     e.preventDefault();
       if(isNaN(requestedPage)){
         alert("please enter a number!");
+        setPage(1);
       }else{
       setPage(requestedPage);
     }
