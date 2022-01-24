@@ -9,11 +9,11 @@ function PaginationNoLibrary() {
     fetch(`https://api.instantwebtools.net/v1/passenger?page=${page}&size=10`)
       .then((response) => response.json())
       .then((resp) => setData(resp.data))
+      if(data.length === 0){
+        alert("Nothing returned");
+    }
   }, [page]);
   
-  if(Object.keys(data).length > 1) {
-    console.log("data set: ", data);
-  }
 
   function changePageUp(e){
     e.preventDefault();
@@ -24,22 +24,25 @@ function PaginationNoLibrary() {
 
   function changePageDown(e){
     e.preventDefault();
-    page = parseInt(page);
-    page-=1;
-    setPage(page);
-    if(page<0){
-      page = 0;
-      alert("no more entries")
-      setPage(page);
+    let pageNum = parseInt(page);
+      if(pageNum < 0){
+        page = 0;
+        alert("no more entries")
+        setPage(page);
+      }else{
+        page-=1;
+        setPage(page);
     }
   }
 
   function jumpToSpecificPage(e, requestedPage){
     e.preventDefault();
-    setPage(requestedPage);
-    console.log( "page number ", requestedPage);
+      if(isNaN(requestedPage)){
+        alert("please enter a number!");
+      }else{
+      setPage(requestedPage);
+    }
   }
-
 
   return (
     <>
