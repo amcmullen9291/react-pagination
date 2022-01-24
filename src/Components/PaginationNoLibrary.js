@@ -17,12 +17,14 @@ function PaginationNoLibrary() {
 
   function changePageUp(e){
     e.preventDefault();
+    page = parseInt(page);
     page+=1;
     setPage(page);
   }
 
   function changePageDown(e){
     e.preventDefault();
+    page = parseInt(page);
     page-=1;
     setPage(page);
     if(page<0){
@@ -32,6 +34,12 @@ function PaginationNoLibrary() {
     }
   }
 
+  function jumpToSpecificPage(e, requestedPage){
+    e.preventDefault();
+    setPage(requestedPage);
+    console.log( "page number ", requestedPage);
+  }
+
 
   return (
     <>
@@ -39,9 +47,20 @@ function PaginationNoLibrary() {
       <h1>Passenger Listings</h1><br />
       <a href={'/'}>Return Home</a>
       <br/><br/>
+      <div id="buttonsArea">
       <button className="navigationButtons" onClick={(e) => {changePageDown(e)}}>{`<`}Previous Page </button>
       <button className="navigationButtons" onClick={(e) => {changePageUp(e)}}> Next Page{`>`}</button>
-      <div>Page # {page}</div>
+      </div>
+      <center><div><b>Page# {page}</b></div></center>
+      <br/>
+      <form onSubmit={(e) => {jumpToSpecificPage(e, e.target.value)}}>
+        <label>
+          Go to specific page:
+          <input type="text" pattern="[0-9]*"
+     onChange={(e) => {jumpToSpecificPage(e, e.target.value)}} defaultValue="" id="choosePageNumber" />
+        </label>
+      </form>
+      <hr/>
       </div>
       {data && (
       <div id="mainBackgroundNoLibrary"><table id="FetchWithLimitTable">

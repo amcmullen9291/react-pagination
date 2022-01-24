@@ -70,4 +70,13 @@
 
     .navigationButtons{
         background-color: purple;
+        margin: 10px;
+    }
+
+    #buttonsArea{
+      margin-left: 2%;
+    }
+
+    #choosePageNumber{
+      width: 60px;
     }
