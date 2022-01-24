@@ -2,14 +2,14 @@ import React, { useEffect, useState } from "react";
 
 
 function PaginationNoLibrary() {
-    const [data, setData] = useState([]);
+    const [data, setData] = useState(null);
     let [page, setPage ] = useState(1);
 
   useEffect(() => {
     fetch(`https://api.instantwebtools.net/v1/passenger?page=${page}&size=10`)
       .then((response) => response.json())
       .then((resp) => setData(resp.data))
-      if(data.length === 0){
+      if((data) && data.length === 0){
         alert("Nothing returned");
     }
   }, [page]);
@@ -24,14 +24,13 @@ function PaginationNoLibrary() {
 
   function changePageDown(e){
     e.preventDefault();
-    let pageNum = parseInt(page);
-      if(pageNum < 0){
-        page = 0;
-        alert("no more entries")
-        setPage(page);
-      }else{
-        page-=1;
-        setPage(page);
+    page = parseInt(page);
+    page-=1;
+    setPage(page);
+    if(page < 1){
+      alert("no more results")
+      let pageNum = 0;
+      setPage(pageNum);
     }
   }
 
