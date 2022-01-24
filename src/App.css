@@ -67,3 +67,7 @@
       position: absolute;
       right: 0;
     }
+
+    .navigationButtons{
+        background-color: purple;
+    }
